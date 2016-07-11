@@ -85,7 +85,7 @@ public class ChunkTests {
     @Test
     @org.junit.Test
     public void testChunkNoProcessorDefined() throws Exception {
-        String METHOD = "testChunkDefaultItemCount";
+        String METHOD = "testChunkNoprocessorDefined";
 
         try {
             Reporter.log("Create job parameters for execution #1:<p>");
@@ -128,7 +128,7 @@ public class ChunkTests {
     @Test
     @org.junit.Test
     public void testChunkNullCheckpointInfo() throws Exception {
-        String METHOD = "testChunkDefaultItemCount";
+        String METHOD = "testChunkNullCheckpointInfo";
 
         try {
 
@@ -164,7 +164,7 @@ public class ChunkTests {
    @Test
    @org.junit.Test
    public void testChunkArtifactInstanceUniqueness() throws Exception {
-       String METHOD = "testChunkDefaultItemCount";
+       String METHOD = "testChunkArtifactUniqueness";
 
        try {
 
@@ -487,6 +487,51 @@ public class ChunkTests {
         }
 
     }
+    
+    /*
+     * @testName: testEmptyWriteArray
+     * @assertion: job will finish successfully with COMPLETED and buffer size = default value of 0 is recognized
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.2 - Processor
+     *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
+     * 
+     * @test_Strategy: start a typical chunk job. 
+     *                 Processor intentionally filters out all read items.
+     *                 Test that the writer completes successfully or is not called. 
+     */
+    @Test
+    @org.junit.Test
+    public void testEmptyWriteArray() throws Exception {
+        String METHOD = "testEmptyWriteArray";
+
+        try {
+            Reporter.log("Create job parameters for execution #1:<p>");
+            Properties jobParams = new Properties();
+            Reporter.log("execution.number=1<p>");
+            Reporter.log("readrecord.fail=40<p>");
+            Reporter.log("app.arraysize=30<p>");
+            jobParams.put("execution.number", "1");
+            jobParams.put("app.checkpoint.position" , "0");
+            jobParams.put("readrecord.fail", "40");
+            jobParams.put("app.arraysize", "30");
+
+            Reporter.log("Locate job XML file: filterAllProcessor.xml<p>");
+
+            Reporter.log("Invoke startJobAndWaitForResult for execution #1<p>");
+            JobExecution execution1 = jobOp.startJobAndWaitForResult("filterAllProcessor", jobParams);
+            Reporter.log("execution #1 JobExecution getBatchStatus()=" + execution1.getBatchStatus() + "<p>");
+            Reporter.log("execution #1 JobExecution getExitStatus()=" + execution1.getExitStatus() + "<p>");
+            assertWithMessage("Testing execution #1", BatchStatus.COMPLETED, execution1.getBatchStatus());
+           // assertWithMessage("Testing execution #1", "buffer size = 0", execution1.getExitStatus());
+            String exitStatus = execution1.getExitStatus();
+            assertWithMessage("Testing execution #1", (exitStatus.equals("buffer size = 0") || exitStatus.equals("COMPLETED")));
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+
+    }
+    
+    
 
     /*
      * @testName: testChunkRestartCustomCheckpoint

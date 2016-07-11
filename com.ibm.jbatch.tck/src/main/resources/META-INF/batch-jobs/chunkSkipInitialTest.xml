@@ -43,6 +43,12 @@
 				<property name="app.arraysize" value="#{jobParameters['app.arraysize']}" />
    	         </properties>
 		 </writer>
+		 <writer ref="skipWriter">
+		     <properties>
+				<property name="writerecord.fail" value="#{jobParameters['writerecord.fail']}" />
+				<property name="app.arraysize" value="#{jobParameters['app.arraysize']}" />
+   	         </properties>
+		 </writer>
 		<skippable-exception-classes>
 			<include class="com.ibm.jbatch.tck.artifacts.reusable.MyParentException"/>
 			<exclude class="java.io.FileNotFoundException"/>
