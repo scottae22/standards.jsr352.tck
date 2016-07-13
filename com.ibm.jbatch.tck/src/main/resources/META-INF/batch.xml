@@ -43,6 +43,7 @@
     <ref id="chunkOnErrorCheckpointListener" class="com.ibm.jbatch.tck.artifacts.specialized.ChunkOnErrorCheckpointListener" />
     <ref id="contextsGetIdJobContextTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.ContextsGetIdJobContextTestBatchlet" />
     <ref id="contextsGetIdStepContextTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.ContextsGetIdStepContextTestBatchlet" />
+    <ref id="countWriter" class="com.ibm.jbatch.tck.artifacts.specialized.countWriter" />
     <ref id="deciderTestsBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsBatchlet" />
     <ref id="deciderTestsDecider" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsDecider" />
     <ref id="deciderTestsJobListener" class="com.ibm.jbatch.tck.artifacts.specialized.DeciderTestsJobListener" />
@@ -56,6 +57,7 @@
     <ref id="doSomethingSimpleTimeArrayReader" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingSimpleTimeArrayReader" />
     <ref id="doSomethingSimpleTimeArrayWriter" class="com.ibm.jbatch.tck.artifacts.specialized.DoSomethingSimpleTimeArrayWriter" />
     <ref id="failRestartBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.FailRestartBatchlet" />
+    <ref id="filterSomeProcessor" class="com.ibm.jbatch.tck.artifacts.specialized.FilterSomeProcessor" />
     <ref id="flowTransitionToDecisionTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.FlowTransitionToDecisionTestBatchlet" />
     <ref id="flowTransitionToDecisionTestDecider" class="com.ibm.jbatch.tck.artifacts.specialized.FlowTransitionToDecisionTestDecider" />
     <ref id="flowTransitionWithinFlowTestBatchlet" class="com.ibm.jbatch.tck.artifacts.specialized.FlowTransitionWithinFlowTestBatchlet" />
@@ -126,4 +128,5 @@
     <ref id="threadTrackingJobListener" class="com.ibm.jbatch.tck.artifacts.specialized.ThreadTrackingJobListener" />
     <ref id="threadTrackingStepListener" class="com.ibm.jbatch.tck.artifacts.specialized.ThreadTrackingStepListener" />
     <ref id="transitionDecider" class="com.ibm.jbatch.tck.artifacts.specialized.TransitionDecider" />
+    <ref id="verifySkipWriteListener" class="com.ibm.jbatch.tck.artifacts.specialized.VerifySkipWriteListener" />
 </batch-artifacts>

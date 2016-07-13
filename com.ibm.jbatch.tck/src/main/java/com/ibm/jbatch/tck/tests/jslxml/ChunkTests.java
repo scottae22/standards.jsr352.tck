@@ -967,6 +967,45 @@ public class ChunkTests {
             handleException(METHOD, e);
         }
     }
+    
+    /*
+     * @testName: testChunkSkipProcessItemCount
+     * @assertion:  The purpose of the test is to show that item-count is based on processed items, not read items. 
+     *             5.2.1.1 - Reader, 5.2.1.1.1 - Reader Properties,
+     *             5.2.1.2 - Processor
+     *             5.2.1.3 - Writer, 5.2.1.3.1 - Writer Properties
+     *             5.2.1 - Chunk, item-count
+     * 
+     * @test_Strategy: start a job with item-count specified as 5
+     * 		The reader generates 25 items and passes them to a processor, which filters out 5 of them.
+     * 		The writer should be called 4 times total to write out the 20 items. If it is called more, then
+     * 		one of the filtered items was counted in the item-count.     
+     */
+    @Test
+    @org.junit.Test
+    public void testChunkSkipProcessItemCount() throws Exception {
+        String METHOD = "testChunkSkipProcessItemCount";
+        try {
+            Reporter.log("Create job parameters for execution #1:<p>");
+            Properties jobParams = new Properties();
+            Reporter.log("execution.number=1<p>");
+            Reporter.log("app.arraysize=25<p>");
+            jobParams.put("execution.number", "1");
+            jobParams.put("app.arraysize", "25");
+            jobParams.put("processrecord.fail","4,9,14,19,24");
+
+            Reporter.log("Locate job XML file: chunkItemCountProcessorSkip.xml<p>");
+
+            Reporter.log("Invoke startJobAndWaitForResult for execution #1<p>");
+            JobExecution execution1 = jobOp.startJobAndWaitForResult("chunkItemCountProcessorSkip", jobParams);
+            Reporter.log("execution #1 JobExecution getBatchStatus()=" + execution1.getBatchStatus() + "<p>");
+            Reporter.log("execution #1 JobExecution getExitStatus()=" + execution1.getExitStatus() + "<p>");
+            assertWithMessage("Testing execution #1", BatchStatus.COMPLETED, execution1.getBatchStatus());
+            assertWithMessage("Testing execution #1", "CHUNK COUNT=4", execution1.getExitStatus());
+        } catch (Exception e) {
+            handleException(METHOD, e);
+        }
+    }
 
     /*
      * @testName: testChunkSkipWrite
